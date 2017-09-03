@@ -697,5 +697,18 @@
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
+        <!--新窗口-->
+        <scene sceneID="22t-NL-aAT">
+            <objects>
+                <viewController title="新窗口" storyboardIdentifier="TargetWindow" id="gNe-45-mWy" sceneMemberID="viewController">
+                    <view key="view" id="XEn-vY-JUl">
+                        <rect key="frame" x="0.0" y="0.0" width="1280" height="640"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="LLP-0e-M8T" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="351"/>
+        </scene>
     </scenes>
 </document>

@@ -11,7 +11,7 @@
 #import <Masonry.h>
 
 
-@interface ViewController () <WKNavigationDelegate>
+@interface ViewController () <WKNavigationDelegate, WKUIDelegate>
 
 @property (weak) IBOutlet WKWebView *webView;
 
@@ -32,6 +32,7 @@
     [self.view addSubview:webView];
     self.webView = webView;
     self.webView.navigationDelegate = self;
+    self.webView.UIDelegate = self;
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
@@ -62,6 +63,27 @@
 
 }
 
+- (nullable WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    WKWebView *wb = [[WKWebView alloc] initWithFrame:CGRectZero configuration:configuration];
+    NSViewController *vc = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"TargetWindow"];
+    [vc.view addSubview:wb];
+    [wb loadRequest:navigationAction.request];
+    [wb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(vc.view);
+    }];
+    [self presentViewControllerAsModalWindow:vc];
+    return wb;
+}
+
+- (void)webViewDidClose:(WKWebView *)webView {
+    [webView removeFromSuperview];
+}
+
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
+    
+}
+
+#pragma mark - Action
 - (void)play {
     [self.webView evaluateJavaScript:@"$('div.left a.playBtn')[0] == null" completionHandler:^(id _Nullable res, NSError * _Nullable error) {
         // playing
