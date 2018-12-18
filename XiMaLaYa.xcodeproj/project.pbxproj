@@ -140,7 +140,7 @@
 				TargetAttributes = {
 					68B273F61F5C1C4700B466D9 = {
 						CreatedOnToolsVersion = 8.3;
-						DevelopmentTeam = 6CMYQQFFT8;
+						DevelopmentTeam = K46WQ32REC;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -345,7 +345,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 6CMYQQFFT8;
+				DEVELOPMENT_TEAM = K46WQ32REC;
 				INFOPLIST_FILE = XiMaLaYa/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soulghost.XiMaLaYa;
@@ -359,7 +359,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 6CMYQQFFT8;
+				DEVELOPMENT_TEAM = K46WQ32REC;
 				INFOPLIST_FILE = XiMaLaYa/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.soulghost.XiMaLaYa;

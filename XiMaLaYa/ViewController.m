@@ -37,20 +37,15 @@
         make.edges.equalTo(self.view);
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(play) name:@"play" object:nil];
+    
+    NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.ximalaya.com/explore/"] encoding:NSUTF8StringEncoding error:nil];
+    html = [html stringByReplacingOccurrencesOfString:@"<head>" withString:@"<head>\n\t<script src=\"http://code.jquery.com/jquery-1.11.0.min.js\"></script>"];
+    [self.webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://www.ximalaya.com/explore/"]];
 
-}
-
-- (void)viewWillAppear {
-    [super viewWillAppear];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.ximalaya.com/explore/"]];
-//    [self.webView loadRequest:request];
 }
 
 - (void)viewDidAppear {
     [super viewDidAppear];
-    NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.ximalaya.com/explore/"] encoding:NSUTF8StringEncoding error:nil];
-    html = [html stringByReplacingOccurrencesOfString:@"<head>" withString:@"<head>\n\t<script src=\"http://code.jquery.com/jquery-1.11.0.min.js\"></script>"];
-    [self.webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://www.ximalaya.com/explore/"]];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -85,18 +80,20 @@
 
 #pragma mark - Action
 - (void)play {
-    [self.webView evaluateJavaScript:@"$('div.left a.playBtn')[0] == null" completionHandler:^(id _Nullable res, NSError * _Nullable error) {
-        // playing
-        if ([res boolValue] == YES) {
-            [self.webView evaluateJavaScript:@"var swallow = $('div.left a.pauseBtn').mousedown();" completionHandler:^(id _Nullable sender, NSError * _Nullable error) {
+    // playing
+    [self.webView evaluateJavaScript:@"document.getElementsByClassName('play').length" completionHandler:^(id _Nullable ret, NSError * _Nullable error) {
+        BOOL isPlaying = ![ret boolValue];
+        if (isPlaying == YES) {
+            [self.webView evaluateJavaScript:@"var swallow = document.getElementsByClassName('pause')[0].click();" completionHandler:^(id _Nullable sender, NSError * _Nullable error) {
                 
             }];
         } else {
-            [self.webView evaluateJavaScript:@"var swallow = $('div.left a.playBtn').mousedown();" completionHandler:^(id _Nullable sender, NSError * _Nullable error) {
+            [self.webView evaluateJavaScript:@"var swallow = document.getElementsByClassName('play')[0].click();" completionHandler:^(id _Nullable sender, NSError * _Nullable error) {
                 
             }];
         }
     }];
+    
     
 }
 
